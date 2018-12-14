@@ -5,6 +5,7 @@ set number
 set ruler
 set expandtab
 set linespace=5
+set sw=4
 
 nmap <F2> :w<CR>
 imap <F2> <ESC>:w<CR>
@@ -12,6 +13,7 @@ noremap <F1> <Esc>
 map <F3> <F2>
 
 let g:tex_flavor='latex'
+let g:ycm_server_python_interpreter = 'python3'
 
 "make YCM compatible with Ultisnips using supertab
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
@@ -33,8 +35,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
-  \ "mode": "active",
-  \ "passive_filetypes": ["tex"] }
+  \ "mode": "passive" }
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
