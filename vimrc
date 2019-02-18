@@ -62,4 +62,6 @@ Plug 'vim-syntastic/syntastic'
 
 Plug 'Yggdroot/indentLine'
 
+Plug 'myusuf3/numbers.vim'
+
 call plug#end()
