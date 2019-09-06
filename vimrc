@@ -1,19 +1,29 @@
 filetype plugin indent on
+syntax on
 
 set encoding=utf-8
-set number
 set ruler
-set expandtab
 set linespace=5
-set sw=4
+set tabstop=4 shiftwidth=4 expandtab
 
-nmap <F2> :w<CR>
-imap <F2> <ESC>:w<CR>
-noremap <F1> <Esc>
-map <F3> <F2>
+nnoremap te :tabe 
+nnoremap tl :tabnext<CR>
+nnoremap th :tabprev<CR>
+nnoremap td :tabclose<CR>
+
+"relative line number"
+set number relativenumber
+augroup numertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave *     set relativenumber
+    autocmd BufEnter,FocusGained,InsertLeave *.tex set norelativenumber
+    autocmd BufLeave,FocusLost,InsertEnter   *     set norelativenumber
+augroup END
 
 let g:tex_flavor='latex'
 let g:ycm_server_python_interpreter = 'python3'
+let g:vimtex_quickfix_mode=0
+let g:indentLine_conceallevel=0
 
 "make YCM compatible with Ultisnips using supertab
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
@@ -24,6 +34,7 @@ let g:SuperTabDefaultCompletionType='<C-n>'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "my-snippets"]
 
 "Recommended syntastic settings
 set statusline+=%#warningmsg#
@@ -48,9 +59,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for': 'tex' }
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe'
 
 Plug 'SirVer/ultisnips'
 
@@ -62,6 +73,14 @@ Plug 'vim-syntastic/syntastic'
 
 Plug 'Yggdroot/indentLine'
 
-Plug 'myusuf3/numbers.vim'
+Plug 'tpope/vim-surround'
+
+Plug 'tpope/vim-commentary'
+
+Plug 'terryma/vim-multiple-cursors'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
